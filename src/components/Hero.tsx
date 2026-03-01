@@ -21,7 +21,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-primary-foreground mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm font-medium text-primary-foreground mb-6">
               <Anchor className="h-4 w-4" />
               Chittagong's Maritime Supply Partner
             </span>
@@ -60,7 +60,7 @@ const Hero = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 text-base px-8 py-6">
+              <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground bg-primary-foreground/10 hover:text-primary-foreground hover:bg-primary-foreground/20 text-base px-8 py-6">
                 Request a Quote
               </Button>
             </Link>
