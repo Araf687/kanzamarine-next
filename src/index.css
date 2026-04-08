@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* in your global CSS or Tailwind config using @layer utilities */
+@keyframes scroll-horizontal {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* adjust based on content width */
+}
+
+.animate-scroll {
+  animation: scroll-horizontal 20s linear infinite;
+}
+
 @layer base {
   :root {
     --background: 210 20% 98%;

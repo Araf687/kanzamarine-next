@@ -79,7 +79,7 @@ const Footer = () => {
             href="https://wa.me/8801878144287"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-accent/20 hover:bg-accent/30 px-4 py-2 rounded-full text-sm transition-colors"
+            className="bg-green-500 hover:bg-green-6600 px-4 py-2 rounded-full text-sm transition-colors"
           >
             💬 WhatsApp Us
           </a>

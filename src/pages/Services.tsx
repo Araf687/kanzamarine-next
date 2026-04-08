@@ -37,23 +37,23 @@ const Services = () => {
           className="text-center mb-12"
         >
           <span className="text-sm font-medium text-accent uppercase tracking-widest">Our Services</span>
-          <h1 className="text-4xl md:text-5xl font-display font-bold mt-3 text-foreground">
+          <h1 className="text-3xl md:text-5xl font-display font-bold mt-3 text-foreground">
             Complete Maritime Services
           </h1>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          <p className="text-muted-foreground mt-4 text-sm lg:text-base max-w-2xl mx-auto">
             From spare parts sourcing to full ship repair — professional maritime services from Chittagong Port.
           </p>
         </motion.div>
 
         <Tabs defaultValue="spare-parts" className="w-full">
-          <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent mb-10">
-            <TabsTrigger value="spare-parts" className="data-[state=active]:gradient-marine data-[state=active]:text-primary-foreground px-6 py-3 rounded-full">
+          <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent mb-5 lg:mb-10">
+            <TabsTrigger value="spare-parts" className="data-[state=active]:gradient-marine data-[state=active]:text-primary-foreground px-3 lg:px-6 py:1.5 lg:py-3 text-sm lg:text-base rounded-full">
               Spare Parts Export
             </TabsTrigger>
-            <TabsTrigger value="repairs" className="data-[state=active]:gradient-marine data-[state=active]:text-primary-foreground px-6 py-3 rounded-full">
+            <TabsTrigger value="repairs" className="data-[state=active]:gradient-marine data-[state=active]:text-primary-foreground px-3 lg:px-6 py:1.5 lg:py-3 text-sm lg:text-base rounded-full">
               Ship Repair
             </TabsTrigger>
-            <TabsTrigger value="stores" className="data-[state=active]:gradient-marine data-[state=active]:text-primary-foreground px-6 py-3 rounded-full">
+            <TabsTrigger value="stores" className="data-[state=active]:gradient-marine data-[state=active]:text-primary-foreground px-3 lg:px-6 py:1.5 lg:py-3 text-sm lg:text-base rounded-full">
               Ship Stores
             </TabsTrigger>
           </TabsList>

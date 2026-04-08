@@ -24,23 +24,46 @@ const ProductCard = ({ product, onQuickView }: { product: Product; onQuickView: 
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
-      className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-marine hover:border-primary/30 transition-all duration-500"
+      className="group flex flex-col h-full bg-card rounded-2xl border border-border overflow-hidden hover:shadow-marine hover:border-primary/30 transition-all duration-500"
     >
-      {/* Image placeholder */}
-      <div className="relative h-48 gradient-marine overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Package className="h-16 w-16 text-primary-foreground/30" />
-        </div>
+      {/* Image Section */}
+      <div className="relative h-58 bg-muted overflow-hidden">
+        {product.image_url ? (
+          <img
+            src={`/products/${product.image_url}`}
+            alt={product.name}
+            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                "https://via.placeholder.com/400x300?text=No+Image";
+            }}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center gradient-marine">
+            <Package className="h-16 w-16 text-primary-foreground/30" />
+          </div>
+        )}
+
+        {/* Badges */}
         {product.badge && (
           <Badge className="absolute top-3 left-3 bg-accent text-accent-foreground border-none">
             {product.badge}
           </Badge>
         )}
+
         <div className="absolute top-3 right-3">
-          <Badge variant={product.inStock ? "default" : "secondary"} className={product.inStock ? "bg-primary text-primary-foreground border-none" : ""}>
+          <Badge
+            variant={product.inStock ? "default" : "secondary"}
+            className={
+              product.inStock
+                ? "bg-primary text-primary-foreground border-none"
+                : ""
+            }
+          >
             {product.inStock ? "In Stock" : "Out of Stock"}
           </Badge>
         </div>
+
         <button
           onClick={() => onQuickView(product)}
           className="absolute bottom-3 right-3 p-2 rounded-full glass opacity-0 group-hover:opacity-100 transition-opacity"
@@ -49,33 +72,57 @@ const ProductCard = ({ product, onQuickView }: { product: Product; onQuickView: 
         </button>
       </div>
 
-      <div className="p-5">
+      {/* Content */}
+      <div className="p-2 lg:p-5 flex flex-col flex-1">
         <p className="text-xs font-medium text-accent uppercase tracking-wider mb-1">
-          {categories.find(c => c.value === product.category)?.label}
+          {categories.find((c) => c.value === product.category)?.label}
         </p>
-        <h3 className="font-display font-semibold text-lg text-foreground mb-2">{product.name}</h3>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">{product.description}</p>
+
+        <h3 className="font-display font-semibold lg:text-lg text-sm text-foreground mb-2">
+          {product.name}
+        </h3>
+
+        <p className="text-muted-foreground text-xs lg:text-sm leading-relaxed mb-4 line-clamp-1 lg:line-clamp-2">
+          {product.description}
+        </p>
 
         {product.brands && (
           <div className="flex flex-wrap gap-1 mb-4">
-            {product.brands.slice(0, 3).map(b => (
-              <span key={b} className="text-[10px] px-2 py-0.5 bg-muted rounded-full text-muted-foreground">{b}</span>
+            {product.brands.slice(0, 3).map((b) => (
+              <span
+                key={b}
+                className="text-[10px] px-2 py-0.5 bg-muted rounded-full text-muted-foreground"
+              >
+                {b}
+              </span>
             ))}
           </div>
         )}
 
+        {/* Button always bottom */}
         <Button
           onClick={toggleCart}
-          className={`w-full transition-all ${inCart ? "bg-accent hover:bg-accent/90 text-accent-foreground" : "gradient-marine text-primary-foreground hover:opacity-90"}`}
+          className={`w-full mt-auto transition-all text-xs lg:text-base ${
+            inCart
+              ? "bg-accent hover:bg-accent/90 text-accent-foreground"
+              : "gradient-marine text-primary-foreground hover:opacity-90"
+          }`}
           disabled={!product.inStock}
         >
-          {inCart ? <><Check className="mr-2 h-4 w-4" /> In Inquiry List</> : <><Plus className="mr-2 h-4 w-4" /> Add to Inquiry</>}
+          {inCart ? (
+            <>
+              <Check className="mr-2 h-4 w-4" /> In Inquiry List
+            </>
+          ) : (
+            <>
+              <Plus className="mr-2 h-4 w-4" /> Add to Inquiry
+            </>
+          )}
         </Button>
       </div>
     </motion.div>
   );
 };
-
 const InquiryCartSidebar = () => {
   const { items, removeItem, clearCart } = useInquiryCart();
 
@@ -141,13 +188,13 @@ const Products = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center  mb-8 lg:mb-12"
         >
           <span className="text-sm font-medium text-accent uppercase tracking-widest">Our Products</span>
-          <h1 className="text-4xl md:text-5xl font-display font-bold mt-3 text-foreground">
+          <h1 className="text-3xl md:text-5xl font-display font-bold mt-3 text-foreground">
             Marine Equipment & Spare Parts
           </h1>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm lg:text-base mt-4 max-w-2xl mx-auto">
             Browse our inventory of reconditioned and new marine equipment. Add items to your inquiry list and get a quote.
           </p>
         </motion.div>
@@ -168,11 +215,10 @@ const Products = () => {
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === cat.value
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat.value
                     ? "gradient-marine text-primary-foreground shadow-marine"
                     : "bg-muted text-muted-foreground hover:text-foreground"
-                }`}
+                  }`}
               >
                 {cat.label}
               </button>
@@ -184,7 +230,7 @@ const Products = () => {
         <div className="flex gap-8">
           <div className="flex-1">
             <AnimatePresence mode="popLayout">
-              <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-6">
                 {filtered.map(p => (
                   <ProductCard key={p.id} product={p} onQuickView={setQuickViewProduct} />
                 ))}
@@ -199,23 +245,38 @@ const Products = () => {
             )}
           </div>
 
-          <div className="hidden lg:block w-72 shrink-0">
+          {/* <div className="hidden lg:block w-72 shrink-0">
             <InquiryCartSidebar />
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* Quick View Modal */}
-      <Dialog open={!!quickViewProduct} onOpenChange={() => setQuickViewProduct(null)}>
-        <DialogContent className="max-w-lg">
+     <Dialog open={!!quickViewProduct} onOpenChange={() => setQuickViewProduct(null)}>
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="font-display text-xl">{quickViewProduct?.name}</DialogTitle>
           </DialogHeader>
           {quickViewProduct && (
             <div className="space-y-4">
-              <div className="h-48 gradient-marine rounded-xl flex items-center justify-center">
-                <Package className="h-16 w-16 text-primary-foreground/30" />
+              {/* Modal-এ ইমেজ দেখানোর জন্য নিচের অংশটি আপডেট করা হয়েছে */}
+              <div className="relative h-68 bg-muted rounded-xl overflow-hidden flex items-center justify-center">
+                {quickViewProduct.image_url ? (
+                  <img
+                    src={`/products/${quickViewProduct.image_url}`}
+                    alt={quickViewProduct.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x300?text=Image+Not+Found';
+                    }}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center gradient-marine">
+                    <Package className="h-16 w-16 text-primary-foreground/30" />
+                  </div>
+                )}
               </div>
+
               <div className="flex gap-2">
                 <Badge variant="secondary">
                   {categories.find(c => c.value === quickViewProduct.category)?.label}
@@ -228,6 +289,7 @@ const Products = () => {
                 </Badge>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">{quickViewProduct.description}</p>
+              
               {quickViewProduct.brands && (
                 <div>
                   <p className="text-xs font-medium text-foreground mb-2">Compatible Brands:</p>
