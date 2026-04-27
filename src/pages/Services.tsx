@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Wrench, Package, Ship, Settings, Zap, Thermometer, PaintBucket, Anchor } from "lucide-react";
+import { Wrench, Package, Ship, Settings, Thermometer, PaintBucket, Anchor, ShieldCheck } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const sparePartsFeatures = [
@@ -12,14 +12,17 @@ const sparePartsFeatures = [
 const repairServices = [
   { icon: Wrench, title: "Structural & Steel Work", desc: "Hull and tank steel plate renewal, post-accident rebuilding, professional welding" },
   { icon: Settings, title: "Mechanical & Hydraulic", desc: "Hydraulic pump/motor repair, crane troubleshooting, pipe section replacement" },
-  { icon: Zap, title: "Electrical & Electronics", desc: "Electric motor rewinding, radar and gyro system maintenance" },
+  // { icon: Zap, title: "Electrical & Electronics", desc: "Electric motor rewinding, radar and gyro system maintenance" },
   { icon: Thermometer, title: "HVAC & Specialist", desc: "Refrigeration and HVAC installations and repairs, galvanization services" },
   { icon: PaintBucket, title: "Maintenance & Finishing", desc: "Sandblasting, hydro-blasting, cleaning, and marine painting" },
 ];
 
 const shipStores = [
-  "Provision & Bonded Stores", "Deck & Engine Stores", "Safety Equipment", "Cabin Stores & Linen",
-  "Paints & Chemicals", "Electrical Stores", "Mooring Ropes & Wires", "Medical Supplies",
+  {
+    icon: ShieldCheck,
+    title: "Safety Equipment",
+    desc: "Life jackets, immersion suits, fire extinguishers, alarms, and other SOLAS-ready essentials.",
+  },
 ];
 
 const item = {
@@ -95,12 +98,15 @@ const Services = () => {
           </TabsContent>
 
           <TabsContent value="stores">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {shipStores.map((store, i) => (
-                <motion.div key={store} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="p-5 bg-card rounded-xl border border-border text-center hover:shadow-card transition-shadow">
-                  <p className="text-sm font-medium text-foreground">{store}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+              {shipStores.map(({ icon: Icon, title, desc }) => (
+                <motion.div key={title} variants={item} initial="hidden" whileInView="show" viewport={{ once: true }}
+                  className="p-8 bg-card rounded-2xl border border-border hover:shadow-marine hover:border-primary/30 transition-all">
+                  <div className="w-12 h-12 rounded-xl gradient-marine flex items-center justify-center mb-4">
+                    <Icon className="h-6 w-6 text-primary-foreground" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">{title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
                 </motion.div>
               ))}
             </div>

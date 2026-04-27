@@ -16,7 +16,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm opacity-80 leading-relaxed">
-              Leading exporter of reusable marine machinery, spare parts, and professional ship repair services from Chittagong Port.
+              Leading exporter and supplier of reusable marine machinery, spare parts, and professional ship repair services from Chittagong Port.
             </p>
           </div>
 

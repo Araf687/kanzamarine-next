@@ -56,12 +56,18 @@ const About = () => {
             className="max-w-3xl text-white"
           >
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Kanza Marine Bangladesh
+              KANZA MARINE
             </h1>
 
-            <p className="text-lg text-white/90">
-              A leading exporter of reusable marine machinery and spare parts
-              from Chittagong — one of the world's largest ship-breaking hubs.
+            <p className="text-lg text-white/90 leading-relaxed">
+              A leading exporter and supplier of high-quality reusable marine
+              machinery and genuine spare parts.
+            </p>
+
+            <p className="mt-4 text-base md:text-lg text-white/85 leading-relaxed">
+              We serve the global maritime industry from our base in
+              Chattogram, while also providing comprehensive ship repair and
+              maintenance services with expert support directly at the port.
             </p>
           </motion.div>
 

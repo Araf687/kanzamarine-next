@@ -35,15 +35,14 @@ const services = [
     title: "Ship Repair & Maintenance",
     image: service2,
     description:
-      "Expert afloat and shore-based repairs at Chittagong and Mongla ports with certified professionals.",
+      "Expert afloat and shore-based repairs at Chittagong ports with certified professionals.",
   },
   {
     icon: Ship,
     title: "Ship Stores & Supplies",
     image: service3,
     description:
-      "Complete maritime supplies inventory supporting daily vessel operations and emergency requirements.",
-  },
+      "Supply of genuine and reconditioned ship spare parts exclusively at Chattogram Port."  },
   {
     icon: Settings,
     title: "Engine Overhaul",
