@@ -66,7 +66,7 @@ const ProductCard = ({ product, onQuickView }: { product: Product; onQuickView: 
 
         <button
           onClick={() => onQuickView(product)}
-          className="absolute bottom-3 right-3 p-2 rounded-full glass opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute bottom-3 right-3 p-2 rounded-full bg-primary shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
         >
           <Eye className="h-4 w-4 text-primary-foreground" />
         </button>
