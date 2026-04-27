@@ -98,7 +98,7 @@ const Services = () => {
           </TabsContent>
 
           <TabsContent value="stores">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
               {shipStores.map(({ icon: Icon, title, desc }) => (
                 <motion.div key={title} variants={item} initial="hidden" whileInView="show" viewport={{ once: true }}
                   className="p-8 bg-card rounded-2xl border border-border hover:shadow-marine hover:border-primary/30 transition-all">
